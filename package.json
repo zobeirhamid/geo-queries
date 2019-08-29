@@ -1,5 +1,5 @@
 {
-  "name": "react-native-realm-geo-queries",
+  "name": "geo-queries",
   "version": "0.0.1",
   "description": "Javascript Geo Queries",
   "main": "index.js",
@@ -8,8 +8,14 @@
     "flow": "flow",
     "babel": "babel-node"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:zobeirhamid/geo-queries.git"
+  },
+  "peerDependencies": {
+    "geolib": "*",
+    "sprintf-js": "*"
+  },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
@@ -31,5 +37,14 @@
   "dependencies": {
     "geolib": "^2.0.24",
     "sprintf-js": "^1.1.2"
-  }
+  },
+  "keywords": [
+    "geo-queries"
+  ],
+  "author": "Zobeir Hamid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zobeirhamid/geo-queries/issues"
+  },
+  "homepage": "https://github.com/zobeirhamid/geo-queries"
 }
