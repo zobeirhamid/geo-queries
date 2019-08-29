@@ -1,9 +1,12 @@
-export GeoQuery from './src/GeoQuery';
-export GeoRegion from './src/GeoRegion';
-export { QueryBuilder } from './src/QueryBuilder';
+import GeoQuery from './src/GeoQuery';
+import GeoRegion from './src/GeoRegion';
+import QueryBuilderInstance, { QueryBuilder } from './src/QueryBuilder';
+
+export { GeoQuery, GeoRegion, QueryBuilder, QueryBuilderInstance };
 
 export default {
   GeoQuery,
   GeoRegion,
-  QueryBuilder
+  QueryBuilder,
+  QueryBuilderInstance
 };
