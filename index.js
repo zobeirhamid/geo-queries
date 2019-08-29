@@ -1,4 +1,5 @@
-import { createGeoQuery } from './src/GeoQuery';
+export GeoQuery, { createGeoQuery } from './src/GeoQuery';
+export GeoRegion from './src/GeoRegion';
 
 export function getQueryForInBox(...args) {
   const geoQuery = createGeoQuery(...args);
@@ -18,5 +19,7 @@ export function getQueryForOrder(...args) {
 export default {
   getQueryForInBox,
   getQueryForDistance,
-  getQueryForOrder
+  getQueryForOrder,
+  GeoQuery,
+  GeoRegion
 };
