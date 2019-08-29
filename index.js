@@ -14,3 +14,9 @@ export function getQueryForOrder(...args) {
   const geoQuery = createGeoQuery(...args);
   return geoQuery.forOrder();
 }
+
+export default {
+  getQueryForInBox,
+  getQueryForDistance,
+  getQueryForOrder
+};
