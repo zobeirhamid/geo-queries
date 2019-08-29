@@ -1,6 +1,6 @@
 {
   "name": "geo-queries",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Javascript Geo Queries",
   "main": "index.js",
   "scripts": {
