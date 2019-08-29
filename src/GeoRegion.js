@@ -3,19 +3,33 @@ import geolib from 'geolib';
 import type { GeoBox, Coordinate } from './types';
 
 export default class GeoRegion {
-  center: Coordinate;
+  center: Coordinate = { latitude: 0, longitude: 0 };
 
-  radius: number;
+  radius: number = 0;
 
   geoBox: ?GeoBox;
 
-  constructor(center: Coordinate, radius: number) {
-    this.center = center;
-    this.radius = radius;
+  hasGeoBox() {
+    return this.geoBox && true;
   }
 
-  getGeoBox(): GeoBox {
-    if (!this.geoBox) {
+  setGeoBox(geoBox: GeoBox) {
+    this.geoBox = geoBox;
+  }
+
+  calculateBoxWithCenterAndRadius() {
+    const boxCoordinate: Array<Coordinate> = geolib.getBoundsOfDistance(
+      this.center,
+      this.radius
+    );
+    this.setGeoBox({
+      southWest: boxCoordinate[0],
+      northEast: boxCoordinate[1]
+    });
+  }
+
+  getGeoBox(): ?GeoBox {
+    if (!this.hasGeoBox() && this.hasCenter() && this.hasRadius()) {
       const boxCoordinate: Array<Coordinate> = geolib.getBoundsOfDistance(
         this.center,
         this.radius
@@ -28,11 +42,32 @@ export default class GeoRegion {
     return this.geoBox;
   }
 
-  getCenter(): Coordinate {
+  hasCenter() {
+    return this.center && true;
+  }
+
+  setCenter(center: Coordinate) {
+    this.center = center;
+  }
+
+  calculateCenterWithBox() {
+    this.setCenter(geolib.getCenter(Object.values(this.geoBox)));
+  }
+
+  getCenter(): ?Coordinate {
+    if (!this.hasCenter() && this.hasGeoBox()) this.calculateCenterWithBox();
     return this.center;
   }
 
-  getRadius(): number {
+  hasRadius() {
+    return this.radius && true;
+  }
+
+  setRadius(radius: number) {
+    this.radius = radius;
+  }
+
+  getRadius(): ?number {
     return this.radius;
   }
 }

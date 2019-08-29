@@ -8,4 +8,5 @@ declare module 'geolib' {
     centerCoordinate: Coordinate,
     radius: number
   ): Array<Coordinate>;
+  declare function getCenter(coordinates: Array<mixed>): Coordinate;
 }
