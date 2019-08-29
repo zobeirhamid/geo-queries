@@ -10,15 +10,13 @@ export default class GeoQuery {
 
   geoRegion: GeoRegion;
 
-  constructor(latitudeKey: string, longitudeKey: string, geoRegion: GeoRegion) {
+  constructor(latitudeKey: string, longitudeKey: string) {
     this.latitudeKey = latitudeKey;
     this.longitudeKey = longitudeKey;
-    this.geoRegion = geoRegion;
   }
 
   // Requires Functions
-  forDistance(): string {
-    const center: Coordinate = this.geoRegion.getCenter();
+  forDistance(center: Coordinate): string {
     const baseQuery: string =
       'ROUND((6371 * 2 * ASIN(SQRT( POWER(SIN(( %3$f - %1$f) *  pi()/180 / 2), 2) +COS( %3$f * pi()/180) * COS(%1$f * pi()/180) * POWER(SIN(( %4$f - %2$f) * pi()/180 / 2), 2) ))), 2)';
     const query: string = sprintf(
@@ -31,8 +29,7 @@ export default class GeoQuery {
     return query;
   }
 
-  forInBox(): string {
-    const geoBox: GeoBox = this.geoRegion.getGeoBox();
+  forInBox(geoBox: GeoBox): string {
     const baseQuery: string =
       '%1$s <= %3$f AND %2$s >= %4$f AND %1$s >= %5$f AND %2$s <= %6$f';
     const query: string = sprintf(
@@ -48,8 +45,7 @@ export default class GeoQuery {
     return query;
   }
 
-  forOrder(): string {
-    const { latitude, longitude }: Coordinate = this.geoRegion.getCenter();
+  forOrder({ latitude, longitude }: Coordinate): string {
     const baseQuery: string =
       '(%3$s - %1$s) * (%3$s - %1$s) + (%4$s - %2$s) * (%4$s - %2$s)';
     const query: string = sprintf(
